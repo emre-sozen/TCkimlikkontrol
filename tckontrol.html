@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   
+
+    <link rel="stylesheet" href="tcstyle.css">
+
+    <title>TC Kimlik Kontrol Uygulaması</title>
+  </head>
+  <body>
+
+
+    
+    
+    <div class="form">
+    <input id="tcno" type="text" name="text" autocomplete="off" required/>
+    
+    <label for="name" class="label-name">
+        <span class="content-name">TC </span>
+    </label>
+    </div>
+
+    <p id="sonuc"></p>
+    <button id="kontrolmet" onclick="kontroltc()">Kontrol</button>
+
+
+
+
+    <script>
+
+    
+      function kontroltc() {
+        var toplam;
+        var tc = document.getElementById("tcno").value;
+        var ilkkarakter = document.getElementById("tcno");
+        for(i = 0; i < 11; i++){
+            toplam += tc[i];
+          }
+
+        if (isNaN(tc)) {
+          return document.getElementById("sonuc").innerHTML="Rakam giriniz";
+        }else{
+          if (tc.length < 11) {
+          return document.getElementById("sonuc").innerHTML="Gerekli sayı girilmedi.";
+        }else if(tc.length > 11){
+          return document.getElementById("sonuc").innerHTML="Fazla sayı girildi.";
+        }else if(tc[0] == 0){
+          return document.getElementById("sonuc").innerHTML="İlk karakter '0' olamaz";
+        }else if((tc[0]+tc[2]+tc[4]+tc[6]+tc[8])*7 - (tc[1]+tc[3]+tc[5]+tc[7]) / 10 !== tc[10]){
+          return document.getElementById("sonuc").innerHTML="Girilen TC numarası geçersizdir.";
+        }
+          
+         if (toplam % 10 != tc[10]) {
+          return document.getElementById("sonuc").innerHTML="Girilen TC numarası geçersizdir.";
+        } else if (isNaN(tc)) {
+          return document.getElementById("sonuc").innerHTML="Kimlik Numarası Sayılardan Oluşmalıdır.";
+        }
+        }
+        
+
+      }
+
+    </script>
+
+  </body>
+</html>
